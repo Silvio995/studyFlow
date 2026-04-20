@@ -6,10 +6,10 @@ The latest UI style, **StudyFlow Pulse**, introduces a compact, modern visual sy
 
 ## Screenshots
 
-![StudyFlow Home](public/screenshots/home.png)
-![StudyFlow Tasks](public/screenshots/tasks.png)
-![StudyFlow Subjects](public/screenshots/subjects.png)
-![StudyFlow About](public/screenshots/about.png)
+![StudyFlow Home](public/screenshots/home-pulse.png)
+![StudyFlow Tasks](public/screenshots/tasks-pulse.png)
+![StudyFlow Subjects](public/screenshots/subjects-pulse.png)
+![StudyFlow About](public/screenshots/about-pulse.png)
 
 ## Features
 
