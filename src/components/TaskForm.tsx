@@ -91,14 +91,14 @@ export function TaskForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card grid gap-3 animate-rise">
+    <form onSubmit={handleSubmit} className="card grid gap-2.5 animate-rise">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="section-title">{editingTask ? "Edit Task" : "New Task"}</h2>
         {editingTask ? (
-          <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">
-            Editing
-          </span>
-        ) : null}
+          <span className="badge badge-warning">Editing</span>
+        ) : (
+          <span className="badge badge-success">Planner</span>
+        )}
       </div>
 
       <input
@@ -108,7 +108,7 @@ export function TaskForm({
         className="field"
       />
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-2 sm:grid-cols-2">
         <select
           value={form.subject}
           onChange={(event) => setForm((prev) => ({ ...prev, subject: event.target.value }))}
@@ -148,7 +148,7 @@ export function TaskForm({
         ))}
       </select>
 
-      <div className="flex flex-wrap gap-2 pt-1">
+      <div className="flex flex-wrap gap-1.5 pt-1">
         <button type="submit" className="button-primary text-sm">
           {editingTask ? "Save Changes" : "Add Task"}
         </button>

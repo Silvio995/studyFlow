@@ -106,23 +106,26 @@ export default function TasksPage() {
   }, [tasks, subjectFilter, statusFilter, sortBy]);
 
   return (
-    <main className="main-shell grid gap-4 md:gap-5">
+    <main className="main-shell grid gap-3.5 md:gap-4.5">
       <header className="panel animate-rise">
-        <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-2.5">
           <div>
             <p className="chip">Tasks</p>
             <h1 className="page-title">Task Dashboard</h1>
-            <p className="page-subtitle">Plan, track, and complete your school work.</p>
+            <p className="page-subtitle">Plan, track, and complete your work.</p>
           </div>
-          <Link href="/" className="button-secondary text-sm">
-            Home
-          </Link>
+          <div className="flex items-center gap-1.5">
+            <span className="badge badge-success">Live Planner</span>
+            <Link href="/" className="button-secondary text-sm">
+              Home
+            </Link>
+          </div>
         </div>
       </header>
 
       <TaskStats tasks={tasks} />
 
-      <section className="grid gap-3 lg:grid-cols-[1.2fr_1fr]">
+      <section className="grid gap-2.5 lg:grid-cols-[1.25fr_0.95fr]">
         <TaskForm
           key={editingTask?.id ?? "new-task"}
           editingTask={editingTask}
@@ -143,10 +146,10 @@ export default function TasksPage() {
         />
       </section>
 
-      <section className="grid gap-2.5">
-        <div className="flex items-center justify-between">
-          <h2 className="section-title text-base">Task List</h2>
-          <p className="text-sm muted-text">{visibleTasks.length} items</p>
+      <section className="grid gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="section-title text-[0.98rem]">Task List</h2>
+          <p className="badge badge-neutral">{visibleTasks.length} items</p>
         </div>
 
         <TaskList

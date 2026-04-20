@@ -10,23 +10,33 @@ const learnings = [
 
 export default function AboutPage() {
   return (
-    <main className="main-shell grid gap-4 md:gap-5">
-      <header className="panel animate-rise">
+    <main className="main-shell grid gap-3.5 md:gap-4.5">
+      <header className="hero-panel animate-rise">
         <p className="chip">About</p>
         <h1 className="page-title">StudyFlow</h1>
-        <p className="page-subtitle">A simple school project for tasks and subjects.</p>
+        <p className="page-subtitle">A compact school project for tasks and subjects.</p>
       </header>
 
-      <section className="card">
-        <h2 className="section-title">Purpose</h2>
-        <p className="mt-1.5 text-sm muted-text">Build a small app that is easy to explain in class.</p>
+      <section className="grid gap-2.5 md:grid-cols-3">
+        <article className="card">
+          <p className="metric-label">Focus</p>
+          <p className="mt-1.5 text-sm font-medium text-main">Simple and explainable</p>
+        </article>
+        <article className="card">
+          <p className="metric-label">Data</p>
+          <p className="mt-1.5 text-sm font-medium text-main">Browser localStorage</p>
+        </article>
+        <article className="card">
+          <p className="metric-label">Style</p>
+          <p className="mt-1.5 text-sm font-medium text-main">Dashboard inspired UI</p>
+        </article>
       </section>
 
       <section className="card">
         <h2 className="section-title">Tech Stack</h2>
         <ul className="mt-2 grid gap-1.5 sm:grid-cols-2">
           {technologies.map((tech) => (
-            <li key={tech} className="rounded-lg bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700">
+            <li key={tech} className="badge badge-neutral justify-center rounded-lg px-3 py-2 text-sm font-semibold">
               {tech}
             </li>
           ))}

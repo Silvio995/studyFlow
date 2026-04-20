@@ -3,29 +3,42 @@ import Link from "next/link";
 const quickCards = [
   {
     title: "Plan",
-    text: "Create tasks by subject.",
+    text: "Build tasks by subject in seconds.",
   },
   {
     title: "Track",
-    text: "Check priorities and due dates.",
+    text: "See priorities and deadlines clearly.",
   },
   {
     title: "Complete",
-    text: "Mark progress quickly.",
+    text: "Close tasks and keep momentum.",
   },
+];
+
+const overview = [
+  { label: "Flow", value: "Focused" },
+  { label: "Mode", value: "Dashboard" },
+  { label: "Sync", value: "Local" },
 ];
 
 export default function HomePage() {
   return (
-    <main className="main-shell grid gap-5 md:gap-6">
+    <main className="main-shell grid gap-4 md:gap-5">
       <section className="hero-panel animate-rise">
-        <p className="chip">Minimal Student Dashboard</p>
-        <h1 className="mt-2.5 text-4xl font-black tracking-tight text-main md:text-5xl">StudyFlow</h1>
-        <p className="page-subtitle mt-2.5 text-base md:text-lg">
-          Organize study tasks with custom subjects.
-        </p>
+        <p className="chip">StudyFlow Pulse</p>
+        <h1 className="mt-2 text-4xl font-black tracking-tight text-main md:text-5xl">Study Dashboard</h1>
+        <p className="page-subtitle mt-2">Organize tasks with a fast and clean workflow.</p>
 
-        <div className="mt-4 flex flex-wrap gap-2.5">
+        <div className="mt-3 grid gap-2 sm:grid-cols-3">
+          {overview.map((item) => (
+            <article key={item.label} className="rounded-xl border border-[var(--border)] bg-[color:var(--surface)] px-3 py-2.5">
+              <p className="metric-label">{item.label}</p>
+              <p className="mt-1 text-base font-bold text-main">{item.value}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-3.5 flex flex-wrap gap-2">
           <Link href="/tasks" className="button-primary">
             Open Tasks
           </Link>
@@ -38,8 +51,8 @@ export default function HomePage() {
       <section className="grid gap-2.5 md:grid-cols-3">
         {quickCards.map((item) => (
           <article key={item.title} className="card animate-rise p-3">
-            <h2 className="section-title">{item.title}</h2>
-            <p className="mt-1.5 text-sm muted-text">{item.text}</p>
+            <p className="chip">{item.title}</p>
+            <p className="mt-2 text-sm font-medium muted-text">{item.text}</p>
           </article>
         ))}
       </section>

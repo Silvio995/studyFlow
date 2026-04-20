@@ -12,14 +12,14 @@ export function TaskList({ tasks, onToggleComplete, onEdit, onDelete }: TaskList
   if (tasks.length === 0) {
     return (
       <div className="empty-panel">
-        <h3 className="text-lg font-semibold text-main">No tasks found</h3>
-        <p className="mt-1.5 text-sm muted-text">Try different filters or add a new task.</p>
+        <h3 className="text-base font-semibold text-main">No tasks found</h3>
+        <p className="mt-1 text-sm muted-text">Try different filters or add a new task.</p>
       </div>
     );
   }
 
   return (
-    <section className="grid gap-3">
+    <section className="grid gap-2.5">
       {tasks.map((task) => (
         <TaskCard
           key={task.id}

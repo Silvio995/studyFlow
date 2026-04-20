@@ -21,18 +21,41 @@ export function TaskStats({ tasks }: TaskStatsProps) {
   }).length;
 
   const cards = [
-    { label: "Total", value: tasks.length, tone: "text-main", bg: "bg-white" },
-    { label: "Done", value: completed, tone: "text-emerald-700", bg: "bg-emerald-50" },
-    { label: "Open", value: pending, tone: "text-amber-700", bg: "bg-amber-50" },
-    { label: "Due Soon", value: dueSoon, tone: "text-rose-700", bg: "bg-rose-50" },
-  ];
+    { label: "Total", value: tasks.length, type: "neutral" },
+    { label: "Done", value: completed, type: "accent" },
+    { label: "Open", value: pending, type: "warning" },
+    { label: "Due Soon", value: dueSoon, type: "danger" },
+  ] as const;
 
   return (
     <section className="grid gap-2.5 sm:grid-cols-2 xl:grid-cols-4">
       {cards.map((card) => (
-        <article key={card.label} className={`card ${card.bg} animate-rise p-3`}>
-          <p className="text-[11px] font-semibold uppercase tracking-wide muted-text">{card.label}</p>
-          <p className={`mt-1.5 text-2xl font-bold ${card.tone}`}>{card.value}</p>
+        <article
+          key={card.label}
+          className={`card metric-card animate-rise ${
+            card.type === "accent"
+              ? "metric-accent"
+              : card.type === "warning"
+                ? "metric-warning"
+                : card.type === "danger"
+                  ? "metric-danger"
+                  : ""
+          }`}
+        >
+          <p className="metric-label">{card.label}</p>
+          <p
+            className={`metric-value ${
+              card.type === "accent"
+                ? "is-accent"
+                : card.type === "warning"
+                  ? "is-warning"
+                  : card.type === "danger"
+                    ? "is-danger"
+                    : ""
+            }`}
+          >
+            {card.value}
+          </p>
         </article>
       ))}
     </section>

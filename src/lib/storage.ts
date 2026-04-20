@@ -6,6 +6,16 @@ const THEME_KEY = "studyflow.theme";
 
 export type ThemeMode = "light" | "dark";
 
+const canUseStorage = (): boolean => typeof window !== "undefined";
+
+const hasStorageKey = (key: string): boolean => {
+  if (!canUseStorage()) {
+    return false;
+  }
+
+  return window.localStorage.getItem(key) !== null;
+};
+
 const sortSubjects = (subjects: string[]): string[] =>
   [...subjects].sort((a, b) => a.localeCompare(b, "en", { sensitivity: "base" }));
 
@@ -84,7 +94,7 @@ const getDemoTasks = (): Task[] => {
 };
 
 export const getStoredTasks = (): Task[] => {
-  if (typeof window === "undefined") {
+  if (!canUseStorage()) {
     return [];
   }
 
@@ -102,7 +112,7 @@ export const getStoredTasks = (): Task[] => {
 };
 
 export const getStoredSubjects = (): string[] => {
-  if (typeof window === "undefined") {
+  if (!canUseStorage()) {
     return [];
   }
 
@@ -122,7 +132,7 @@ export const getStoredSubjects = (): string[] => {
 };
 
 export const getStoredTheme = (): ThemeMode => {
-  if (typeof window === "undefined") {
+  if (!canUseStorage()) {
     return "light";
   }
 
@@ -131,32 +141,57 @@ export const getStoredTheme = (): ThemeMode => {
 };
 
 export const getInitialTasks = (): Task[] => {
-  const stored = getStoredTasks();
-  if (stored.length > 0) {
-    return stored;
+  if (!canUseStorage()) {
+    return getDemoTasks();
   }
 
-  const demoTasks = getDemoTasks();
-  saveTasks(demoTasks);
-  return demoTasks;
+  if (!hasStorageKey(TASKS_KEY)) {
+    const demoTasks = getDemoTasks();
+    saveTasks(demoTasks);
+    return demoTasks;
+  }
+
+  const raw = window.localStorage.getItem(TASKS_KEY);
+  if (!raw) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(raw) as Task[];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
 };
 
 export const getInitialSubjects = (tasks: Task[]): string[] => {
-  const stored = getStoredSubjects();
-  if (stored.length > 0) {
-    return stored;
+  if (!canUseStorage()) {
+    return normalizeSubjects(tasks.map((task) => task.subject));
   }
 
-  const derived = normalizeSubjects(tasks.map((task) => task.subject));
-  if (derived.length > 0) {
+  if (!hasStorageKey(SUBJECTS_KEY)) {
+    const derived = normalizeSubjects(tasks.map((task) => task.subject));
     saveSubjects(derived);
+    return derived;
   }
 
-  return derived;
+  const raw = window.localStorage.getItem(SUBJECTS_KEY);
+  if (!raw) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed)
+      ? normalizeSubjects(parsed.filter((item) => typeof item === "string"))
+      : [];
+  } catch {
+    return [];
+  }
 };
 
 export const saveTasks = (tasks: Task[]): void => {
-  if (typeof window === "undefined") {
+  if (!canUseStorage()) {
     return;
   }
 
@@ -164,7 +199,7 @@ export const saveTasks = (tasks: Task[]): void => {
 };
 
 export const saveSubjects = (subjects: string[]): void => {
-  if (typeof window === "undefined") {
+  if (!canUseStorage()) {
     return;
   }
 
@@ -173,7 +208,7 @@ export const saveSubjects = (subjects: string[]): void => {
 };
 
 export const saveTheme = (theme: ThemeMode): void => {
-  if (typeof window === "undefined") {
+  if (!canUseStorage()) {
     return;
   }
 

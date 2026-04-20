@@ -22,15 +22,18 @@ export function TaskFilters({
   onSortChange,
 }: TaskFiltersProps) {
   return (
-    <section className="card grid content-start gap-3 animate-rise">
-      <h2 className="section-title">Filters</h2>
+    <section className="card grid content-start gap-2.5 animate-rise bg-[color:var(--surface-soft)]">
+      <div className="flex items-center justify-between gap-2">
+        <h2 className="section-title">Filters</h2>
+        <span className="badge badge-neutral">Quick view</span>
+      </div>
 
-      <label className="grid gap-1.5 text-sm muted-text">
+      <label className="grid gap-1 text-xs font-semibold uppercase tracking-wide muted-text">
         Subject
         <select
           value={subjectFilter}
           onChange={(event) => onSubjectFilterChange(event.target.value)}
-          className="field"
+          className="field text-sm font-medium normal-case tracking-normal"
         >
           <option value="tutte">All subjects</option>
           {subjects.map((subject) => (
@@ -41,12 +44,12 @@ export function TaskFilters({
         </select>
       </label>
 
-      <label className="grid gap-1.5 text-sm muted-text">
+      <label className="grid gap-1 text-xs font-semibold uppercase tracking-wide muted-text">
         Status
         <select
           value={statusFilter}
           onChange={(event) => onStatusFilterChange(event.target.value as TaskStatus)}
-          className="field"
+          className="field text-sm font-medium normal-case tracking-normal"
         >
           <option value="tutte">All</option>
           <option value="completato">Completed</option>
@@ -54,12 +57,12 @@ export function TaskFilters({
         </select>
       </label>
 
-      <label className="grid gap-1.5 text-sm muted-text">
+      <label className="grid gap-1 text-xs font-semibold uppercase tracking-wide muted-text">
         Sort by
         <select
           value={sortBy}
           onChange={(event) => onSortChange(event.target.value as TaskSort)}
-          className="field"
+          className="field text-sm font-medium normal-case tracking-normal"
         >
           <option value="scadenza_vicina">Due date (nearest)</option>
           <option value="scadenza_lontana">Due date (latest)</option>

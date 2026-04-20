@@ -37,14 +37,15 @@ export function SiteNav() {
 
   return (
     <header className="app-header sticky top-0 z-40">
-      <nav className="main-shell py-3">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <Link href="/" className="text-lg font-extrabold tracking-tight text-main md:text-xl">
+      <nav className="main-shell py-2.5 md:py-3">
+        <div className="flex flex-wrap items-center justify-between gap-2.5">
+          <Link href="/" className="brand-mark text-lg font-extrabold tracking-tight text-main md:text-xl">
+            <span className="brand-dot" aria-hidden />
             StudyFlow
           </Link>
 
-          <div className="flex flex-wrap items-center justify-end gap-1.5">
-            <ul className="flex flex-wrap items-center justify-end gap-1.5">
+          <div className="flex flex-wrap items-center justify-end gap-1.5 rounded-full border border-[var(--border)] bg-[color:var(--surface)] px-1.5 py-1">
+            <ul className="flex flex-wrap items-center justify-end gap-1">
               {links.map((link) => {
                 const active = isActive(pathname, link.href);
                 return (
@@ -64,10 +65,10 @@ export function SiteNav() {
             <button
               type="button"
               onClick={onToggleTheme}
-              className="button-secondary text-sm"
+              className="button-secondary theme-toggle"
               aria-label="Toggle theme"
             >
-              Toggle Theme
+              ◐
             </button>
           </div>
         </div>

@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "StudyFlow",
-  description: "Organize school tasks and subjects in a simple way.",
+  description: "Organize tasks and subjects in a simple way.",
 };
 
 const themeBootScript = `

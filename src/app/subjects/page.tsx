@@ -119,16 +119,20 @@ export default function SubjectsPage() {
   };
 
   return (
-    <main className="main-shell grid gap-4 md:gap-5">
+    <main className="main-shell grid gap-3.5 md:gap-4.5">
       <header className="panel animate-rise">
         <p className="chip">Subjects</p>
         <h1 className="page-title">Subjects Overview</h1>
         <p className="page-subtitle">Add subjects and check progress quickly.</p>
       </header>
 
-      <section className="card animate-rise">
-        <h2 className="section-title">Add Subject</h2>
-        <form onSubmit={onAddSubject} className="mt-3 grid gap-2 sm:grid-cols-[1fr_auto]">
+      <section className="card animate-rise bg-[color:var(--surface-soft)]">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="section-title">Add Subject</h2>
+          <span className="badge badge-success">Catalog</span>
+        </div>
+
+        <form onSubmit={onAddSubject} className="mt-2.5 grid gap-2 sm:grid-cols-[1fr_auto]">
           <input
             value={draftSubject}
             onChange={(event) => {
@@ -144,8 +148,9 @@ export default function SubjectsPage() {
             Add
           </button>
         </form>
+
         {notice ? (
-          <p className={`mt-2 text-xs font-medium ${notice.tone === "error" ? "text-rose-700" : "text-emerald-700"}`}>
+          <p className={`mt-2 text-xs font-semibold ${notice.tone === "error" ? "notice-text-error" : "notice-text-success"}`}>
             {notice.text}
           </p>
         ) : null}
@@ -153,44 +158,42 @@ export default function SubjectsPage() {
 
       {summaries.length === 0 ? (
         <section className="empty-panel">
-          <h2 className="text-lg font-semibold text-main">No subjects yet</h2>
+          <h2 className="text-base font-semibold text-main">No subjects yet</h2>
           <p className="mt-1 text-sm muted-text">Add your first subject or create a task.</p>
-          <Link href="/tasks" className="button-secondary mt-4 inline-flex">
+          <Link href="/tasks" className="button-secondary mt-3 inline-flex">
             Go to Tasks
           </Link>
         </section>
       ) : (
-        <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {summaries.map((item) => {
             const progress = item.total > 0 ? Math.round((item.completed / item.total) * 100) : 0;
 
             return (
-              <article key={item.subject} className="card animate-rise p-3.5">
+              <article key={item.subject} className="card animate-rise p-3">
                 <div className="flex items-center justify-between gap-2">
                   <h2 className="text-base font-semibold text-main">{item.subject}</h2>
-                  <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-[11px] font-semibold text-indigo-700">
-                    {progress}%
-                  </span>
+                  <span className="badge badge-success">{progress}%</span>
                 </div>
 
-                <div className="mt-3 grid grid-cols-3 gap-1.5 text-center">
-                  <div className="rounded-lg bg-slate-50 p-2">
-                    <p className="text-[10px] font-semibold uppercase tracking-wide muted-text">Total</p>
-                    <p className="mt-1 text-lg font-bold text-main">{item.total}</p>
+                <div className="mt-2.5 grid grid-cols-3 gap-1.5 text-center">
+                  <div className="rounded-lg border border-[var(--border)] bg-[color:var(--surface-soft)] p-1.5">
+                    <p className="metric-label">Total</p>
+                    <p className="mt-1 text-base font-bold text-main">{item.total}</p>
                   </div>
-                  <div className="rounded-lg bg-emerald-50 p-2">
-                    <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-700">Done</p>
-                    <p className="mt-1 text-lg font-bold text-emerald-700">{item.completed}</p>
+                  <div className="rounded-lg border border-[var(--border)] bg-[color:var(--accent-soft)] p-1.5">
+                    <p className="metric-label">Done</p>
+                    <p className="mt-1 text-base font-bold notice-text-success">{item.completed}</p>
                   </div>
-                  <div className="rounded-lg bg-amber-50 p-2">
-                    <p className="text-[10px] font-semibold uppercase tracking-wide text-amber-700">Open</p>
-                    <p className="mt-1 text-lg font-bold text-amber-700">{item.pending}</p>
+                  <div className="rounded-lg border border-[var(--border)] bg-[color:var(--surface-soft)] p-1.5">
+                    <p className="metric-label">Open</p>
+                    <p className="mt-1 text-base font-bold text-[color:var(--warning)]">{item.pending}</p>
                   </div>
                 </div>
 
-                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-100">
+                <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-[color:var(--surface-soft)]">
                   <div
-                    className="h-full rounded-full bg-indigo-500"
+                    className="h-full rounded-full bg-[color:var(--accent)]"
                     style={{ width: `${progress}%` }}
                     aria-label={`${item.subject} progress: ${progress}%`}
                   />
@@ -199,7 +202,7 @@ export default function SubjectsPage() {
                 <button
                   type="button"
                   onClick={() => onDeleteSubject(item.subject, item.total)}
-                  className="danger-btn mt-3 w-full text-sm"
+                  className="danger-btn mt-2.5 w-full text-sm"
                 >
                   Delete Subject
                 </button>

@@ -1,6 +1,8 @@
 # StudyFlow
 
-StudyFlow is a frontend-only study planner built with **Next.js App Router**, **TypeScript**, and **Tailwind CSS**. It helps students manage tasks and subjects in a clean, beginner-friendly interface. The app has **no backend** and uses browser `localStorage` for persistence.
+StudyFlow is a frontend-only study planner built with **Next.js App Router**, **TypeScript**, and **Tailwind CSS**. It helps students organize tasks, subjects, and progress in a clean dashboard-style interface.
+
+The latest UI style, **StudyFlow Pulse**, introduces a compact, modern visual system with strong metrics, green accent highlights, and polished light/dark themes.
 
 ## Screenshots
 
@@ -11,58 +13,58 @@ StudyFlow is a frontend-only study planner built with **Next.js App Router**, **
 
 ## Features
 
-- Add, edit, complete, and delete tasks
+- Create, edit, complete, and delete tasks
 - Add custom study subjects
-- Select a subject when creating or editing a task
-- Delete subjects only when they have no tasks
+- Select a subject when creating or editing tasks
+- Delete subjects only when they have no related tasks
 - Filter tasks by subject and status
 - Sort tasks by due date, priority, or newest
 - View task statistics
 - View progress by subject
 - Toggle between Light and Dark theme
-- Persist tasks, subjects, and theme in `localStorage`
+- Persist tasks, subjects, and theme in localStorage
+- Seed demo data only on the first app load
 
 ## Tech Stack
 
-- Next.js (App Router)
+- Next.js App Router
+- React
 - TypeScript
 - Tailwind CSS
-- React
-- Browser localStorage (no backend)
+- Browser localStorage
 
 ## Pages Overview
 
-- `/` (Home): Minimal overview and quick navigation
-- `/tasks`: Main dashboard for task management (form, filters, stats, list)
+- `/` (Home): Dashboard-style overview and quick navigation
+- `/tasks`: Main task workspace (form, filters, stats, list)
 - `/subjects`: Subject management and subject progress cards
-- `/about`: Project purpose, stack, and learning outcomes
+- `/about`: Project summary, stack, and learning outcomes
 
 ## Data Persistence
 
-StudyFlow stores data in the browser:
+StudyFlow is **frontend-only** and stores everything in browser localStorage:
 
 - Tasks: `studyflow.tasks`
 - Subjects: `studyflow.subjects`
 - Theme: `studyflow.theme`
 
-Notes:
+Technical notes:
 
-- The app has no backend and no database.
 - `task.subject` remains a **string** for simplicity.
-- Subjects are merged from saved subjects and existing task subjects, so demo/legacy tasks still work.
+- Subject options are merged from saved subjects and existing task subjects so demo/legacy tasks still work.
+- Demo tasks are seeded only on the first app load, not every time the task list is empty.
 
 ## Subject Management
 
 - Users can add custom subjects from the Subjects page.
-- Task forms use a subject dropdown based on available subjects.
-- A subject can be deleted **only if it has zero tasks**.
+- A subject can be deleted only if it has zero related tasks.
 - Subjects with existing tasks cannot be deleted to avoid orphan task data.
-- If a subject has linked tasks, the app shows a clear blocking message.
+- If a subject is still used by tasks, the app shows a blocking message.
 
-## Theme Toggle
+## Theme System
 
-- A Light/Dark theme toggle is available in the navigation bar.
-- Theme preference is saved in `localStorage` under `studyflow.theme`.
+- Light and Dark themes are supported.
+- Theme preference is stored in localStorage under `studyflow.theme`.
 - The selected theme is applied on reload.
 
 ## How to Run Locally
@@ -70,11 +72,6 @@ Notes:
 ```bash
 npm install
 npm run dev
-```
-
-Useful checks:
-
-```bash
 npm run lint
 npm run build
 ```
@@ -108,21 +105,21 @@ studyflow/
 │  │  └─ storage.ts
 │  └─ types/
 │     └─ task.ts
-└─ package.json
+└─ README.md
 ```
 
 ## What I Learned
 
-- How to structure a small Next.js App Router project
-- How to build reusable React components for CRUD flows
-- How to persist app state with `localStorage`
-- How to keep UI simple and presentation-friendly
-- How to add safe feature constraints (for example, protected subject deletion)
+- Building a complete frontend CRUD flow with React state
+- Structuring a Next.js App Router project with reusable components
+- Managing local persistence safely with localStorage
+- Designing a compact dashboard UI for presentation
+- Keeping UX rules clear (for example, protected subject deletion)
 
 ## Future Improvements
 
-- Add due-date reminders (frontend notifications)
 - Add optional task notes
-- Add subject color tags
-- Add export/import of local data (JSON)
-- Add basic test coverage for storage and UI behavior
+- Add due-date reminders (frontend notifications)
+- Add data export/import (JSON)
+- Add optional subject color tags
+- Add basic automated tests for storage and UI flows
